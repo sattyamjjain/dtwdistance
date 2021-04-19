@@ -1,12 +1,18 @@
+import 'package:dtwdistance/dtwdistance.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:dtwdistance/dtwdistance.dart';
-
 void main() {
-  test('adds one to input values', () {
-    final calculator = Calculator();
-    expect(calculator.addOne(2), 3);
-    expect(calculator.addOne(-7), -6);
-    expect(calculator.addOne(0), 1);
+  test('test to measure distance of two arrays', () {
+    final dtwObject = DTW();
+    expect(
+        dtwObject.distance([0, 1, 2, 3, 4], [0, 2, 4, 6, 8]), 4.69041575982343);
+    expect(
+        dtwObject.distance([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [0, 2, 4, 6, 8, 12, 14, 16, 18, 20]),
+        15.0);
+    expect(
+        dtwObject
+            .distance([0, 0, 1, 2, 1, 0, 1, 0, 0], [0, 1, 2, 0, 0, 0, 0, 0, 0]),
+        1.4142135623730951);
   });
 }
