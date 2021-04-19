@@ -1,3 +1,3 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.1] - 2021-04-20.
 
-* TODO: Describe initial release.
+* Flutter Package  for time series distances (e.g. Dynamic Time Warping) used in the DTAI Research Group..
