@@ -1,3 +1,7 @@
 ## [0.0.1] - 2021-04-20.
 
-* Flutter Package  for time series distances (e.g. Dynamic Time Warping) used in the DTAI Research Group..
+* Initial flutter package to calculate distance between two time series
+
+## [1.0.0] - 2021-04-20.
+
+* Stable package to handle the distance calculation.

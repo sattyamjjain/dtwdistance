@@ -26,20 +26,20 @@ class DTW {
     /*
     Dynamic Time Warping.
     This function keeps a compact matrix, not the full warping paths matrix.
-    :param s1: Firstx sequence
+    :param s1: First sequence
     :param s2: Second sequence
     :param window: Only allow for maximal shifts from the two diagonals smaller than this number.
         It includes the diagonal, meaning that an Euclidean distance is obtained by setting window=1.
-    :param max_dist: Stop if the returned values will be larger than this value
-    :param max_step: Do not allow steps larger than this value
-    :param max_length_diff: Return infinity if length of two series is larger
+    :param maxDist: Stop if the returned values will be larger than this value
+    :param maxStep: Do not allow steps larger than this value
+    :param maxLengthDiff: Return infinity if length of two series is larger
     :param penalty: Penalty to add if compression or expansion is applied
     :param psi: Psi relaxation parameter (ignore start and end of matching).
         Useful for cyclical series.
-    :param use_c: Use fast pure c compiled functions
-    :param use_pruning: Prune values based on Euclidean distance.
+    :param useC: Use fast pure c compiled functions
+    :param usePruning: Prune values based on Euclidean distance.
         This is the same as passing ub_euclidean() to max_dist
-    :param only_ub: Only compute the upper bound (Euclidean).
+    :param onlyUb: Only compute the upper bound (Euclidean).
     Returns: DTW distance
     */
 
@@ -51,18 +51,6 @@ class DTW {
       } else {
         logger.d('distance fast');
       }
-      //   return distance_fast(
-      //       s1,
-      //       s2,
-      //       window,
-      //       max_dist = max_dist,
-      //       max_step = max_step,
-      //       max_length_diff = max_length_diff,
-      //       penalty = penalty,
-      //       psi = psi,
-      //       use_pruning = use_pruning,
-      //       only_ub = only_ub)
-      // }
     }
 
     var r = s1.length;
@@ -210,10 +198,6 @@ class DTW {
     }
     if (psi == 0) {
       d = dtw[i1 * length + min(c, c + window - 1) - skip];
-    } else {
-      var ic = min(c, c + window - 1) - skip;
-      var vc = dtw.getRange(i1 * length + ic - psi, i1 * length + ic + 1);
-      // var d = min(array_min(vc), psiShortest);
     }
     if (maxDist.runtimeType != String) {
       if (maxDist != null && d > maxDist) {
@@ -224,8 +208,3 @@ class DTW {
     return d;
   }
 }
-
-// void main() {
-//   var distance = DTW.distance([0, 1, 2, 3, 4], [0, 2, 4, 6, 8]);
-//   print(distance);
-// }
