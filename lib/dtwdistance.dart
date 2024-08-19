@@ -43,7 +43,7 @@ class DTW {
     Returns: DTW distance
     */
 
-    var inf = "inf";
+    var inf = double.infinity;
 
     if (useC) {
       if (dtwCC == null) {
@@ -116,10 +116,10 @@ class DTW {
 
     for (int i = 0; i < r; i++) {
       var skipp = skip;
-      skip = max(0, i - max(0, r - c) - window + 1);
+      skip = max(0, (i - max(0, r - c) - window + 1).toInt());
       i0 = 1 - i0;
       i1 = 1 - i1;
-      for (int ii = i1 * length; ii < i1 * length + length; ii++) {
+      for (int ii = (i1 * length).toInt(); ii < i1 * length + length; ii++) {
         dtw[ii] = inf;
       }
       var jStart = max(0, i - max(0, r - c) - window + 1);
@@ -135,9 +135,9 @@ class DTW {
         skip = 0;
       }
       if (psi != 0 && jStart == 0 && i < psi) {
-        dtw[i1 * length] = 0;
+        dtw[(i1 * length).toInt()] = 0;
       }
-      for (int j = jStart; j < jEnd; j++) {
+      for (int j = jStart.toInt(); j < jEnd; j++) {
         d = pow((s1[i] - s2[j]), 2);
         if (maxDist.runtimeType != String) {
           if (d > maxStep) {
@@ -149,18 +149,18 @@ class DTW {
         assert(j + 1 - skipp >= 0);
         assert(j - skip >= 0);
 
-        var num1 = dtw[i0 * length + j - skipp];
+        var num1 = dtw[(i0 * length + j - skipp).toInt()];
         var num2;
-        if (dtw[i0 * length + j + 1 - skipp].runtimeType != String) {
-          num2 = dtw[i0 * length + j + 1 - skipp] + penalty;
+        if (dtw[(i0 * length + j + 1 - skipp).toInt()].runtimeType != String) {
+          num2 = dtw[(i0 * length + j + 1 - skipp).toInt()] + penalty;
         } else {
-          num2 = dtw[i0 * length + j + 1 - skipp];
+          num2 = dtw[(i0 * length + j + 1 - skipp).toInt()];
         }
         var num3;
-        if (dtw[i1 * length + j - skipp].runtimeType != String) {
-          num3 = dtw[i1 * length + j - skipp] + penalty;
+        if (dtw[(i1 * length + j - skipp).toInt()].runtimeType != String) {
+          num3 = dtw[(i1 * length + j - skipp).toInt()] + penalty;
         } else {
-          num3 = dtw[i1 * length + j - skipp];
+          num3 = dtw[(i1 * length + j - skipp).toInt()];
         }
 
         List<double> tempList = [];
@@ -175,10 +175,10 @@ class DTW {
           tempList.add(num3);
         }
 
-        dtw[i1 * length + j + 1 - skip] = d + tempList.reduce(min);
+        dtw[(i1 * length + j + 1 - skip).toInt()] = d + tempList.reduce(min);
 
         if (maxDist.runtimeType != String) {
-          if (dtw[i1 * length + j + 1 - skip] > maxDist) {
+          if (dtw[(i1 * length + j + 1 - skip).toInt()] > maxDist) {
             if (!smallerFound) {
               sc = j + 1;
             }
@@ -193,11 +193,11 @@ class DTW {
       }
       ec = ecNext;
       if (psi != 0 && jEnd == s2.length && s1.length - 1 - i <= psi) {
-        psiShortest = min(psiShortest, dtw[i1 * length + length - 1]);
+        psiShortest = min(psiShortest, dtw[(i1 * length + length - 1).toInt()]);
       }
     }
     if (psi == 0) {
-      d = dtw[i1 * length + min(c, c + window - 1) - skip];
+      d = dtw[(i1 * length + min(c, c + window - 1) - skip).toInt()];
     }
     if (maxDist.runtimeType != String) {
       if (maxDist != null && d > maxDist) {

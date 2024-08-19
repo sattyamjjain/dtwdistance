@@ -22,18 +22,18 @@ class ED {
     }
 
     for (var pair in zip([s1, s2])) {
-      ub += pow((pair[0] - pair[1]), 2);
+      ub += pow((pair[0] - pair[1]), 2).toInt();
     }
 
     if (s1.length > s2.length) {
       var v2 = s2[n - 1];
       for (var v1 in s1.getRange(n, s1.length - 1)) {
-        ub += pow((v1 - v2), 2);
+        ub += pow((v1 - v2), 2).toInt();
       }
     } else if (s1.length < s2.length) {
       var v1 = s1[n - 1];
       for (var v2 in s2.getRange(n, s2.length - 1)) {
-        ub += pow((v1 - v2), 2);
+        ub += pow((v1 - v2), 2).toInt();
       }
     }
 
